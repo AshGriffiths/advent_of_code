@@ -41,7 +41,7 @@ with open("input.txt", "r") as input:
         last_digit = found[-1]
         line_value = int(first_digit + last_digit)
         print(
-            f"Brought Forward: {total}\n Original: {line} Just Digits: {line}\n Found: {found}\n Number: {line_value}\n"
+            f"Brought Forward: {total}\n Original: {line} Just Numbers: {''.join(matches)}\n Found: {found}\n Number: {line_value}\n"
         )
         total += line_value
 print(f"Final Total: {total}")
