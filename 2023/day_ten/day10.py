@@ -5,6 +5,17 @@ VALID_EAST = ["-", "J", "7"]
 VALID_SOUTH = ["|", "L", "J"]
 VALID_WEST = ["-", "L", "F"]
 
+REPLACE_PIPES = {
+    "|": "│",
+    "-": "─",
+    "F": "┌",
+    "L": "└",
+    "7": "┐",
+    "J": "┘",
+    ".": "•",
+    "S": "┘",
+}
+
 
 def get_valid_adjacent_locations(location, height, width):
     locations = []
@@ -110,11 +121,38 @@ def get_next_location(prev, curr, pipe):
                 next_x = curr_x + 1
             else:
                 next_y = curr_y + 1
-    print(f"{prev} -> {pipe} @ {curr} -> ({next_x}, {next_y})")
     return (next_x, next_y)
 
 
-with open("test2.txt", "r") as input:
+def get_inside_count(sketch, loop):
+    inside_points = []
+    count = 0
+    for y, row in enumerate(sketch):
+        prev_corner = None
+        crossings = 0
+        for x, col in enumerate(row):
+            if (x, y) in loop:
+                match col:
+                    case "|":
+                        crossings += 1
+                    case "7":
+                        if prev_corner == "L":
+                            crossings += 1
+                    case "J":
+                        if prev_corner == "F":
+                            crossings += 1
+                    case "S":
+                        crossings += 1
+                if col != "-":
+                    prev_corner = col
+            else:
+                if crossings % 2 == 1:
+                    count += 1
+                    inside_points.append((x, y))
+    return (count, inside_points)
+
+
+with open("input.txt", "r") as input:
     sketch = [[pos for pos in line.strip()] for line in input.readlines()]
     height = len(sketch)
     width = len(sketch[0])
@@ -146,7 +184,18 @@ with open("test2.txt", "r") as input:
                 valid = True
         if valid:
             next_locations.append((next_x, next_y))
-    print(f"{start} {next_locations}")
     count, loop = count_loop(sketch, start, next_locations)
+    inside_count, inside_points = get_inside_count(sketch, loop)
     print(f"Part One : {count}")
-    print(loop)
+    print(f"Part Two : {inside_count}")
+    for y, row in enumerate(sketch):
+        print(str(y) + "\t", end="")
+        for x, col in enumerate(row):
+            col = REPLACE_PIPES[col]
+            if (x, y) in loop:
+                print("\033[42m\033[31m" + col + "\033[40m\033[37m", end="")
+            elif (x, y) in inside_points:
+                print("\033[41m\033[32m" + col + "\033[40m\033[37m", end="")
+            else:
+                print(col, end="")
+        print()
