@@ -31,10 +31,8 @@ with open("input.txt", "r") as input:
     total_p2 = 0
     for row in rows:
         pattern, groups = row
-        int_groups_p1 = tuple(map(int, groups.split(",")))
-        int_groups_p2 = int_groups_p1 * 5
-        print(int_groups_p2)
-        total_p1 += count_possibilities(pattern, int_groups_p1)
-        total_p2 += count_possibilities("?".join((pattern,) * 5), int_groups_p2)
+        int_groups = tuple(map(int, groups.split(",")))
+        total_p1 += count_possibilities(pattern, int_groups)
+        total_p2 += count_possibilities("?".join((pattern,) * 5), int_groups * 5)
     print(f"Part One : {total_p1}")
     print(f"Part Two : {total_p2}")
