@@ -3,7 +3,10 @@ from functools import cache
 
 @cache
 def count_possibilities(springs: str, groups: tuple[int, ...]) -> int:
+    # Base case
+    # i.e. is the tuple ()
     if not groups:
+        # is everything left in springs either unknown or not a spring
         if all(spring in [".", "?"] for spring in springs):
             return 1
         return 0
