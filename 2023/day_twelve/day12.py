@@ -1,6 +1,8 @@
 from functools import cache
 
 
+# Memoize this function, must only take immutables so it can be hashed
+# thats why the groups has to be a tuple rather than a list
 @cache
 def count_possibilities(springs: str, groups: tuple[int, ...]) -> int:
     # Base case
