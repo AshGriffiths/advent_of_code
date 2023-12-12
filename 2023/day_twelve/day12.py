@@ -11,9 +11,9 @@ def count_possibilities(springs: str, groups: tuple[int, ...]) -> int:
     # (car groups)
     size_first_group = groups[0]
     # (cdr groups)
-    cdr_groups = groups[1:]
+    remaining_groups = groups[1:]
     # Add the sizes of the remaining groups, plus 1 extra for each gap that must exist
-    remaining_spring_spaces = sum(cdr_groups) + len(cdr_groups)
+    remaining_spring_spaces = sum(remaining_groups) + len(remaining_groups)
     count = 0
     for i in range(len(springs) - remaining_spring_spaces - size_first_group + 1):
         possible_springs = "." * i + "#" * size_first_group + "."
@@ -21,7 +21,9 @@ def count_possibilities(springs: str, groups: tuple[int, ...]) -> int:
             spring == possible_spring or spring == "?"
             for spring, possible_spring in zip(springs, possible_springs)
         ):
-            count += count_possibilities(springs[len(possible_springs) :], cdr_groups)
+            count += count_possibilities(
+                springs[len(possible_springs) :], remaining_groups
+            )
     return count
 
 
