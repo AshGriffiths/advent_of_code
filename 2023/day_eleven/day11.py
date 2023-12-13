@@ -16,15 +16,15 @@ with open("input.txt", "r") as input:
     dist_y_p2 = -1
     adjusted_galaxies_p1 = []
     adjusted_galaxies_p2 = []
-    for k, row in enumerate(observations):
+    for k, rown in enumerate(observations):
         dist_y_p1 = dist_y_p1 + 2 if k in empty_rows else dist_y_p1 + 1
         dist_y_p2 = dist_y_p2 + 1_000_000 if k in empty_rows else dist_y_p2 + 1
         dist_x_p1 = -1
         dist_x_p2 = -1
-        for l, col in enumerate(row):
+        for l, coln in enumerate(rown):
             dist_x_p1 = dist_x_p1 + 2 if l in empty_cols else dist_x_p1 + 1
             dist_x_p2 = dist_x_p2 + 1_000_000 if l in empty_cols else dist_x_p2 + 1
-            if col == "#":
+            if coln == "#":
                 adjusted_galaxies_p1.append((dist_x_p1, dist_y_p1))
                 adjusted_galaxies_p2.append((dist_x_p2, dist_y_p2))
 
