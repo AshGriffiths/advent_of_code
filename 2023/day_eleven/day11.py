@@ -1,4 +1,4 @@
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     observations = input.readlines()
     empty_rows = []
     empty_cols = []

@@ -1,6 +1,6 @@
 import re
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     total = 0
     cards = input.readlines()
     card_count: dict[int, int] = {}

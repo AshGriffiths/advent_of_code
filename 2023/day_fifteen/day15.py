@@ -15,7 +15,7 @@ def calculate_focusing_power(hashmap: dict[int, list[dict[str, int]]]) -> int:
     return total
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     sequence = input.read()
     steps = sequence.split(",")
     p1_total = sum(map(calculate_hash, steps))

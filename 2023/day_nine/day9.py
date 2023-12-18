@@ -7,7 +7,7 @@ def next_reading(reading_set):
     return reading_set[-1] + next_reading([x[1] - x[0] for x in pairwise(reading_set)])
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     readings = [[int(val) for val in line.split(" ")] for line in input.readlines()]
     p1_results = []
     p2_results = []

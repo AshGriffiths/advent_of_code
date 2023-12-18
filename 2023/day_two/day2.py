@@ -1,12 +1,12 @@
 import re
 
-with open("input.txt", "r") as file:
+with open("input.txt", "r") as input_file:
     total = 0
     total_power = 0
     red_max = 12
     green_max = 13
     blue_max = 14
-    games = file.readlines()
+    games = input_file.readlines()
     game_number_pattern = r"^Game (\d+):"
     cube_pattern = r"(\d+) (red|green|blue)"
     for game in games:

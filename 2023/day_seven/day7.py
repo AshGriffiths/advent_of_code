@@ -49,7 +49,7 @@ def compare_hands(a, b):
             return -diff
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     lines = input.readlines()
     hands = []
     for line in lines:

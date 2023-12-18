@@ -5,7 +5,7 @@ class Directions:
     RIGHT = (1, 0)
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     instructions = [
         (x, int(y), z)
         for x, y, z in [line.split() for line in input.read().strip().split("\n")]

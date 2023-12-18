@@ -75,7 +75,7 @@ def get_valid_adjacent_locations(
     return locations
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     engine_rows = input.read().splitlines()
     engine: list[list[str]] = []
     for row in engine_rows:

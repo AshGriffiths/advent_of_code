@@ -71,7 +71,7 @@ def calculate_load(grid: list[list[str]]) -> int:
     return load
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     platform = [[c for c in line.strip()] for line in input.readlines()]
     p1_grid = deepcopy(platform)
     p1_total = calculate_load(roll_rocks(p1_grid))

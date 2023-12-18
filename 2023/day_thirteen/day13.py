@@ -15,7 +15,7 @@ def check_symmetry(grid: list[str], allowed_smudges: int = 0) -> int:
     return 0
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     grids = [row for row in [s.splitlines() for s in input.read().split("\n\n")]]
     transposed_grids = [list("".join(x) for x in zip(*grid)) for grid in grids]
     p1_total = 0

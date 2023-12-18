@@ -94,7 +94,7 @@ def calculate_path(
     return total
 
 
-with open("input.txt", "r") as input:
+with open("input.txt", "r") as input_file:
     contraption = [[c for c in line.strip()] for line in input.readlines()]
     # Input is actually square
     length = len(contraption)
