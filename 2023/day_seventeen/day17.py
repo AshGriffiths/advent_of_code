@@ -22,7 +22,7 @@ class Directions:
         raise ValueError("Not a valid direction.")
 
 
-def djikstra(
+def dijkstra(
     graph: list[list[int]],
     value: tuple[int, tuple[int, int], tuple[int, int] | None],
     min_travel: int = 1,
@@ -64,7 +64,7 @@ def djikstra(
 
 with open("input.txt", "r") as input:
     maze = [[int(x) for x in line.strip()] for line in input.readlines()]
-    p1_total = djikstra(maze, (0, (0, 0), None))
+    p1_total = dijkstra(maze, (0, (0, 0), None))
     print(f"Part One : {p1_total}")
-    p2_total = djikstra(maze, (0, (0, 0), None), 4, 10)
+    p2_total = dijkstra(maze, (0, (0, 0), None), 4, 10)
     print(f"Part Two : {p2_total}")
