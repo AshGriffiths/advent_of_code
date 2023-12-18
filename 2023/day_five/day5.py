@@ -1,27 +1,27 @@
 def process_values(values, maps):
     for map in maps:
-        next = []
+        next_cell = []
         for dest, src, size in map:
             i = 0
             while i < len(values):
                 start, length = values[i]
                 if src <= start < src + size <= start + length:
-                    next.append((start - src + dest, src + size - start))
+                    next_cell.append((start - src + dest, src + size - start))
                     values[i] = (src + size, start + length - src - size)
                 elif start <= src < start + length <= src + size:
-                    next.append((dest, start + length - src))
+                    next_cell.append((dest, start + length - src))
                     values[i] = (start, src - start)
                 elif start <= src < src + size <= start + length:
-                    next.append((dest, size))
+                    next_cell.append((dest, size))
                     values[i] = (start, src - start)
                     values.append((src + size, start + length - src - size))
                 if src <= start < start + length <= src + size:
-                    next.append((start - src + dest, length))
+                    next_cell.append((start - src + dest, length))
                     values[i] = values[-1]
                     del values[-1]
                 else:
                     i += 1
-        values += next
+        values += next_cell
     return values
 
 

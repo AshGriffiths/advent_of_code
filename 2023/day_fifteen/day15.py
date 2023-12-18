@@ -25,8 +25,8 @@ with open("input.txt", "r") as input:
         if step[-1].isdigit():
             focal_length = int(step[-1])
             label = step[:-2]
-            hash = calculate_hash(label)
-            box = hashmap[hash]
+            hash_value = calculate_hash(label)
+            box = hashmap[hash_value]
             if len(box) != 0:
                 labels = list({k: None for lens in box for k in lens.keys()}.keys())
                 if label in labels:
@@ -38,8 +38,8 @@ with open("input.txt", "r") as input:
                 box.append({label: focal_length})
         else:
             label = step[:-1]
-            hash = calculate_hash(label)
-            box = hashmap[hash]
+            hash_value = calculate_hash(label)
+            box = hashmap[hash_value]
             labels = list({k: None for lens in box for k in lens.keys()}.keys())
             if label in labels:
                 del box[labels.index(label)]

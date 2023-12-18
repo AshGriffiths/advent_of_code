@@ -7,17 +7,17 @@ class Directions:
     LEFT = (-1, 0)
     RIGHT = (1, 0)
 
-    movements = [UP, LEFT, DOWN, RIGHT]
+    movements: list[tuple[int, int]] = [UP, LEFT, DOWN, RIGHT]
 
     @staticmethod
-    def invert(dir: tuple[int, int]) -> tuple[int, int]:
-        if dir == Directions.UP:
+    def invert(direction: tuple[int, int]) -> tuple[int, int]:
+        if direction == Directions.UP:
             return Directions.DOWN
-        if dir == Directions.DOWN:
+        if direction == Directions.DOWN:
             return Directions.UP
-        if dir == Directions.LEFT:
+        if direction == Directions.LEFT:
             return Directions.RIGHT
-        if dir == Directions.RIGHT:
+        if direction == Directions.RIGHT:
             return Directions.LEFT
         raise ValueError("Not a valid direction.")
 
@@ -41,19 +41,21 @@ def dijkstra(
         if (pos, forbidden) in visited:
             continue
         visited.add((pos, forbidden))
-        for dir in Directions.movements:
+        for direction in Directions.movements:
             weight_change = 0
-            if forbidden and (dir == forbidden or Directions.invert(dir) == forbidden):
+            if forbidden and (
+                direction == forbidden or Directions.invert(direction) == forbidden
+            ):
                 continue
             for dist in range(1, max_travel + 1):
-                next_x = x + (dir[0] * dist)
-                next_y = y + (dir[1] * dist)
+                next_x = x + (direction[0] * dist)
+                next_y = y + (direction[1] * dist)
                 if next_x in range(width) and next_y in range(height):
                     weight_change += graph[next_y][next_x]
                     if dist < min_travel:
                         continue
                     new_weight = weight + weight_change
-                    key = ((next_x, next_y), dir)
+                    key = ((next_x, next_y), direction)
                     if key in weights:
                         if new_weight > weights[key]:
                             continue

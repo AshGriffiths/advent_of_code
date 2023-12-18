@@ -19,61 +19,61 @@ def bfs(
     queue = deque([value])
     while queue:
         current = queue.popleft()
-        pos, dir = current
+        pos, direction = current
         x, y = pos
         if not (x < 0 or y < 0 or x >= width or y >= height):
             energized[y][x] = energized[y][x] + 1
-        next = (x + dir[0], y + dir[1])
-        next_x, next_y = next
+        next_pos = (x + direction[0], y + direction[1])
+        next_x, next_y = next_pos
         if next_x < 0 or next_y < 0 or next_x >= width or next_y >= height:
             continue
         cell = graph[next_y][next_x]
         updates = []
-        match dir:
+        match direction:
             case Directions.UP:
                 match cell:
                     case "." | "|":
-                        updates.append((next, dir))
+                        updates.append((next_pos, direction))
                     case "/":
-                        updates.append((next, Directions.RIGHT))
+                        updates.append((next_pos, Directions.RIGHT))
                     case "\\":
-                        updates.append((next, Directions.LEFT))
+                        updates.append((next_pos, Directions.LEFT))
                     case "-":
-                        updates.append((next, Directions.LEFT))
-                        updates.append((next, Directions.RIGHT))
+                        updates.append((next_pos, Directions.LEFT))
+                        updates.append((next_pos, Directions.RIGHT))
             case Directions.DOWN:
                 match cell:
                     case "." | "|":
-                        updates.append((next, dir))
+                        updates.append((next_pos, direction))
                     case "/":
-                        updates.append((next, Directions.LEFT))
+                        updates.append((next_pos, Directions.LEFT))
                     case "\\":
-                        updates.append((next, Directions.RIGHT))
+                        updates.append((next_pos, Directions.RIGHT))
                     case "-":
-                        updates.append((next, Directions.LEFT))
-                        updates.append((next, Directions.RIGHT))
+                        updates.append((next_pos, Directions.LEFT))
+                        updates.append((next_pos, Directions.RIGHT))
             case Directions.LEFT:
                 match cell:
                     case "." | "-":
-                        updates.append((next, dir))
+                        updates.append((next_pos, direction))
                     case "/":
-                        updates.append((next, Directions.DOWN))
+                        updates.append((next_pos, Directions.DOWN))
                     case "\\":
-                        updates.append((next, Directions.UP))
+                        updates.append((next_pos, Directions.UP))
                     case "|":
-                        updates.append((next, Directions.UP))
-                        updates.append((next, Directions.DOWN))
+                        updates.append((next_pos, Directions.UP))
+                        updates.append((next_pos, Directions.DOWN))
             case Directions.RIGHT:
                 match cell:
                     case "." | "-":
-                        updates.append((next, dir))
+                        updates.append((next_pos, direction))
                     case "/":
-                        updates.append((next, Directions.UP))
+                        updates.append((next_pos, Directions.UP))
                     case "\\":
-                        updates.append((next, Directions.DOWN))
+                        updates.append((next_pos, Directions.DOWN))
                     case "|":
-                        updates.append((next, Directions.UP))
-                        updates.append((next, Directions.DOWN))
+                        updates.append((next_pos, Directions.UP))
+                        updates.append((next_pos, Directions.DOWN))
         for value in updates:
             if value not in visited:
                 visited.add(value)

@@ -3,7 +3,7 @@ import re
 with open("input.txt", "r") as input:
     total = 0
     cards = input.readlines()
-    card_count = {}
+    card_count: dict[int, int] = {}
     for card in cards:
         card_split = card.split(": ", maxsplit=1)
         card_num = card_split[0]
@@ -31,21 +31,21 @@ with open("input.txt", "r") as input:
             card_total = 0
         total += card_total
         card_count[int(card_num)] = win_count
-    final_card_count = {}
-    for card, wins in card_count.items():
-        if card in final_card_count:
-            c, w = final_card_count[card]
-            final_card_count[card] = (c + 1, w)
+    final_card_count: dict[int, tuple[int, int]] = {}
+    for current_card, wins in card_count.items():
+        if current_card in final_card_count:
+            c, w = final_card_count[current_card]
+            final_card_count[current_card] = (c + 1, w)
         else:
-            final_card_count[card] = (1, wins)
-        for i in range(card + 1, card + wins + 1):
+            final_card_count[current_card] = (1, wins)
+        for i in range(current_card + 1, current_card + wins + 1):
             if i in final_card_count:
                 c, w = final_card_count[i]
-                final_card_count[i] = (c + final_card_count[card][0], w)
+                final_card_count[i] = (c + final_card_count[current_card][0], w)
             else:
-                final_card_count[i] = (final_card_count[card][0], card_count[i])
+                final_card_count[i] = (final_card_count[current_card][0], card_count[i])
         print(
-            f"Card {card}, Count {final_card_count[card][0]}, Wins {final_card_count[card][1]}"
+            f"Card {current_card}, Count {final_card_count[current_card][0]}, Wins {final_card_count[current_card][1]}"
         )
     print(f"Total : {total}")
     total_cards = 0

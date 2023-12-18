@@ -1,12 +1,12 @@
 from copy import deepcopy
 
 
-def roll_rocks(grid: list[list[str]], dir: str = "N") -> list[list[str]]:
+def roll_rocks(grid: list[list[str]], direction: str = "N") -> list[list[str]]:
     height = len(grid)
     width = len(grid[0])
     range_y = range(height)
     range_x = range(width)
-    match dir:
+    match direction:
         case "S":
             range_y = range(height)[::-1]
         case "E":
@@ -14,7 +14,7 @@ def roll_rocks(grid: list[list[str]], dir: str = "N") -> list[list[str]]:
     for y in range_y:
         for x in range_x:
             if grid[y][x] == "O":
-                match dir:
+                match direction:
                     case "N":
                         next_pos = y
                         while next_pos > 0:
@@ -56,8 +56,8 @@ def roll_rocks(grid: list[list[str]], dir: str = "N") -> list[list[str]]:
 
 
 def perform_one_cycle(grid: list[list[str]]) -> str:
-    for dir in ["N", "W", "S", "E"]:
-        roll_rocks(grid, dir)
+    for direction in ["N", "W", "S", "E"]:
+        roll_rocks(grid, direction)
     return "".join(["".join(row) for row in grid])
 
 

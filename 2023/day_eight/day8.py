@@ -12,8 +12,8 @@ def check_loop(path, graph, start):
     period = len(path)
     dir_one = cycle(path)
     dir_two = cycle(path)
-    for i, dir in enumerate(dir_one, start=1):
-        step_one = graph[step_one][dir]
+    for i, direction in enumerate(dir_one, start=1):
+        step_one = graph[step_one][direction]
         step_two = graph[step_two][next(dir_two)]
         step_two = graph[step_two][next(dir_two)]
         if step_one == step_two and i % period == (i * 2) % period:
@@ -39,9 +39,9 @@ with open("input.txt", "r") as input:
     p1_current = p1_root
     p1_steps = 0
     while p1_current != p1_terminal:
-        for dir in path:
+        for direction in path:
             p1_steps += 1
-            p1_current = graph[p1_current][dir]
+            p1_current = graph[p1_current][direction]
             if p1_current == p1_terminal:
                 break
     p2_roots = frozenset(

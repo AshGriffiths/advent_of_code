@@ -18,9 +18,9 @@ with open("input.txt", "r") as file:
         print(f"Game: {game_number}")
         game_rounds = game.split(":")[1:]
         rounds = "".join(game_rounds).split(";")
-        for round in rounds:
-            cubes = round.strip().split(",")
-            print(f"  Round: {rounds.index(round) + 1}\n    Cubes: {cubes}")
+        for current_round in rounds:
+            cubes = current_round.strip().split(",")
+            print(f"  Round: {rounds.index(current_round) + 1}\n    Cubes: {cubes}")
             for colour_sets in cubes:
                 matches = re.findall(cube_pattern, colour_sets)
                 count, colour = matches[0]
