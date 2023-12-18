@@ -10,14 +10,8 @@ with open("input.txt", "r") as input:
         (x, int(y), z)
         for x, y, z in [line.split() for line in input.read().strip().split("\n")]
     ]
-    p1_x = 0
-    p1_y = 0
-    p1_perimeter = 0
-    p1_area = 0
-    p2_x = 0
-    p2_y = 0
-    p2_perimeter = 0
-    p2_area = 0
+    p1_x, p1_y, p1_perimeter, p1_area = 0, 0, 0, 0
+    p2_x, p2_y, p2_perimeter, p2_area = 0, 0, 0, 0
     dir_decode = str.maketrans("0123", "RDLU")
     for instruction in instructions:
         p1_direction, p1_count, colour = instruction
