@@ -1,8 +1,7 @@
 from collections.abc import Callable
-from copy import deepcopy
 from functools import reduce
 from operator import mul, gt, lt
-from typing import Any, NamedTuple
+from typing import NamedTuple
 
 
 class ValidRange(NamedTuple):
@@ -22,35 +21,31 @@ class Rule(NamedTuple):
     def calculate_passing_ranges(
         self, attribute_ranges: dict[str, ValidRange]
     ) -> tuple[dict[str, ValidRange] | None, ...]:
-        passing_ranges = deepcopy(attribute_ranges)
-        failing_ranges = deepcopy(attribute_ranges)
-        if self.fn is gt:
-            passing_ranges[self.category] = ValidRange(
-                self.value + 1, passing_ranges[self.category].max_value
-            )
-            failing_ranges[self.category] = ValidRange(
-                failing_ranges[self.category].min_value, self.value
-            )
-            if passing_ranges[self.category].max_value <= self.value:
-                return None, failing_ranges
-            elif failing_ranges[self.category].min_value > self.value:
-                return passing_ranges, None
-        elif self.fn is lt:
-            passing_ranges[self.category] = ValidRange(
-                passing_ranges[self.category].min_value, self.value - 1
-            )
-            failing_ranges[self.category] = ValidRange(
-                self.value, failing_ranges[self.category].max_value
-            )
-            if failing_ranges[self.category].min_value >= self.value:
-                return passing_ranges, None
-            elif passing_ranges[self.category].max_value < self.value:
-                return None, failing_ranges
+        min_val, max_val = attribute_ranges[self.category]
+        passing_ranges = dict(attribute_ranges)
+        failing_ranges = dict(attribute_ranges)
+        min_result = self.run(min_val)
+        max_result = self.run(max_val)
+        if (
+            (self.fn is gt and min_result)
+            or (self.fn is lt and max_result)
+            or self.fn is always
+        ):
+            return attribute_ranges, None
+        elif self.fn is gt and max_result:
+            passing_ranges[self.category] = ValidRange(self.value + 1, max_val)
+            failing_ranges[self.category] = ValidRange(min_val, self.value)
+        elif self.fn is lt and min_result:
+            passing_ranges[self.category] = ValidRange(min_val, self.value - 1)
+            failing_ranges[self.category] = ValidRange(self.value, max_val)
+        else:
+            return None, attribute_ranges
         return passing_ranges, failing_ranges
 
 
 class WorkFlow(NamedTuple):
     rules: list[Rule]
+    default: str
 
 
 def always(*args) -> bool:
@@ -141,7 +136,7 @@ with open("input.txt", "r") as input_file:
                 rules.append(Rule(attribute, gt if op == ">" else lt, value, dest))
             else:
                 rules.append(Rule("x", always, 1, ins))
-        workflows[label] = WorkFlow(rules)
+        workflows[label] = WorkFlow(rules, rules[-1].dest)
     for part in parts_desc.splitlines():
         attributes = part[1:-1].split(",")
         part_dict: dict[str, int] = {}
