@@ -50,7 +50,7 @@ def compare_hands(a, b):
 
 
 with open("input.txt", "r") as input_file:
-    lines = input.readlines()
+    lines = input_file.readlines()
     hands = []
     for line in lines:
         hand, bid = line.split()

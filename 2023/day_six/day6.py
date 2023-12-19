@@ -1,7 +1,7 @@
 from functools import reduce
 
 with open("input.txt", "r") as input_file:
-    time, dist = input.read().split("\n")
+    time, dist = input_file.read().split("\n")
     times = [int(t) for t in filter(lambda x: x, time.split(":")[1].split())]
     dists = [int(d) for d in filter(lambda x: x, dist.split(":")[1].split())]
     p1 = zip(times, dists)

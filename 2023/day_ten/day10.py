@@ -153,7 +153,7 @@ def get_inside_count(sketch, loop):
 
 
 with open("input.txt", "r") as input_file:
-    sketch = [[pos for pos in line.strip()] for line in input.readlines()]
+    sketch = [[pos for pos in line.strip()] for line in input_file.readlines()]
     height = len(sketch)
     width = len(sketch[0])
     start = None

@@ -26,7 +26,7 @@ def process_values(values, maps):
 
 
 with open("input.txt", "r") as input_file:
-    seed_section, *map_sections = input.read().split("\n\n")
+    seed_section, *map_sections = input_file.read().split("\n\n")
     seeds = [int(seed) for seed in seed_section.split()[1:]]
     maps = [
         [[int(val) for val in entry.split()] for entry in map_def.splitlines()[1:]]

@@ -8,7 +8,9 @@ def next_reading(reading_set):
 
 
 with open("input.txt", "r") as input_file:
-    readings = [[int(val) for val in line.split(" ")] for line in input.readlines()]
+    readings = [
+        [int(val) for val in line.split(" ")] for line in input_file.readlines()
+    ]
     p1_results = []
     p2_results = []
     for reading_set in readings:

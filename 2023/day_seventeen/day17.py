@@ -65,7 +65,7 @@ def dijkstra(
 
 
 with open("input.txt", "r") as input_file:
-    maze = [[int(x) for x in line.strip()] for line in input.readlines()]
+    maze = [[int(x) for x in line.strip()] for line in input_file.readlines()]
     p1_total = dijkstra(maze, (0, (0, 0), None))
     print(f"Part One : {p1_total}")
     p2_total = dijkstra(maze, (0, (0, 0), None), 4, 10)

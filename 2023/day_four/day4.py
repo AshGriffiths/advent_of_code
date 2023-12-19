@@ -2,7 +2,7 @@ import re
 
 with open("input.txt", "r") as input_file:
     total = 0
-    cards = input.readlines()
+    cards = input_file.readlines()
     card_count: dict[int, int] = {}
     for card in cards:
         card_split = card.split(": ", maxsplit=1)

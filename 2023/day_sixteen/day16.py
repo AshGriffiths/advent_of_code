@@ -95,7 +95,7 @@ def calculate_path(
 
 
 with open("input.txt", "r") as input_file:
-    contraption = [[c for c in line.strip()] for line in input.readlines()]
+    contraption = [[c for c in line.strip()] for line in input_file.readlines()]
     # Input is actually square
     length = len(contraption)
     p1_start = (-1, 0), (Directions.RIGHT)

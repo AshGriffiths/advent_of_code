@@ -8,7 +8,7 @@ class Directions:
 with open("input.txt", "r") as input_file:
     instructions = [
         (x, int(y), z)
-        for x, y, z in [line.split() for line in input.read().strip().split("\n")]
+        for x, y, z in [line.split() for line in input_file.read().strip().split("\n")]
     ]
     p1_x, p1_y, p1_perimeter, p1_area = 0, 0, 0, 0
     p2_x, p2_y, p2_perimeter, p2_area = 0, 0, 0, 0

@@ -35,7 +35,7 @@ def count_possibilities(springs: str, groups: tuple[int, ...]) -> int:
 with open("input.txt", "r") as input_file:
     rows = [
         [splits[0], splits[1]]
-        for splits in [line.split() for line in input.readlines()]
+        for splits in [line.split() for line in input_file.readlines()]
     ]
     total_p1 = 0
     total_p2 = 0

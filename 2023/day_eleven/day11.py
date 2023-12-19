@@ -1,5 +1,5 @@
 with open("input.txt", "r") as input_file:
-    observations = input.readlines()
+    observations = input_file.readlines()
     empty_rows = []
     empty_cols = []
     for i, row in enumerate(observations):

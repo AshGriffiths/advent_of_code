@@ -1,7 +1,7 @@
 import re
 
 with open("input.txt", "r") as input_file:
-    lines = input.readlines()
+    lines = input_file.readlines()
     total = 0
     number_words = (
         "zero",

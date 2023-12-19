@@ -27,7 +27,7 @@ def lcm(periods):
 
 
 with open("input.txt", "r") as input_file:
-    path, node_desc = input.read().split("\n\n")
+    path, node_desc = input_file.read().split("\n\n")
     nodes = node_desc.split("\n")
     graph = {}
     for node in nodes:
