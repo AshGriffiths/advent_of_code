@@ -146,5 +146,5 @@ with open("input.txt", "r") as input_file:
         parts.append(part_dict)
     p1_total = process_parts(parts, workflows)
     p2_total = process_ranges(workflows)
-    print(f"Part One : {p1_total}, error = {p1_total - 489392}")
-    print(f"Part Two : {p2_total}, error = {p2_total - 134370637448305}")
+    print(f"Part One : {p1_total}")
+    print(f"Part Two : {p2_total}")
