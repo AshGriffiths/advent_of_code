@@ -29,8 +29,10 @@ class Conjunction(NamedTuple):
     dest: list["FlipFlop" | "Conjunction"]
 
     def recv(self, src: str, x: bool):
+        # Set state of input from src
         self.state[src] = x
         output = True
+        # If all the states are high send low, else high
         if all(self.state.values()):
             output = False
         for component in self.dest:
@@ -43,11 +45,14 @@ class FlipFlop(NamedTuple):
     dest: list["FlipFlop" | "Conjunction"]
 
     def recv(self, src: str, x: bool):
+        # if high, do nothing
         if x:
-            return
+            pass
+        # Flip the state of the src
         else:
             self.state[src] = not self.state[src]
             output = False
+            # Is state is high send high else low
             if self.state:
                 output = True
             for component in self.dest:
