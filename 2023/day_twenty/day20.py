@@ -48,11 +48,11 @@ class FlipFlop(NamedTuple):
         # if high, do nothing
         if x:
             pass
-        # Flip the state of the src
+        # If low, flip the state of the src
         else:
             self.state[src] = not self.state[src]
             output = False
-            # If state is high send high else low
+            # If state is now high, send high, else low
             if self.state:
                 output = True
             for component in self.dest:
