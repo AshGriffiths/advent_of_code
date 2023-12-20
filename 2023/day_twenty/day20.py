@@ -52,7 +52,7 @@ class FlipFlop(NamedTuple):
         else:
             self.state[src] = not self.state[src]
             output = False
-            # Is state is high send high else low
+            # If state is high send high else low
             if self.state:
                 output = True
             for component in self.dest:
